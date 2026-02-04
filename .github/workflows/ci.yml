@@ -7,14 +7,21 @@ on:
     branches: [ main ]
 
 jobs:
-  sanity:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Sanity check
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build API
         run: |
-          echo "CI is running"
-          ls -la
+          cd api
+          go mod init pixn/api || true
+          go mod tidy
+          go build
