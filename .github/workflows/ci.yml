@@ -25,3 +25,4 @@ jobs:
           go mod init pixn/api || true
           go mod tidy
           go build
+          
